@@ -1,0 +1,46 @@
+textarea{
+    resize: none;
+}
+
+.notes
+{
+    padding: 2%;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-family: Arial, Helvetica, Sans-serif;
+    width:100%;
+    height:750px;
+}
+.notes:focus
+{
+    outline: none;
+}
+
+.logs
+{
+    padding: 2%;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-family: Arial, Helvetica, Sans-serif;
+    width:100%;
+    height:750px;
+}
+.logs:focus
+{
+    outline: none;
+}
+
+.no-border 
+{
+    border-style: hidden !important;
+}
+
+.no-margin-top 
+{
+    margin-top: 0px
+}
+
+.text-align-centre
+{
+    text-align: center;
+}

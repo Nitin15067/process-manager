@@ -1,0 +1,178 @@
+<html>
+	<head>
+		<title>Welcone</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="../static/semantic/semantic.min.css">
+		<link rel="stylesheet" type="text/css" href="../static/semantic/components/menu.min.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/my_pages/process.css">
+
+
+	</head>
+	<body>
+		<div class="ui top attached menu top_menu_bar">
+			<a class="item home_icon" href="/">
+				<i class="home icon"></i>
+			</a>
+			<a class="item new_process_icon" href="/new_process">
+				<i class="plus icon"></i>
+			</a>
+			<a class="item finished_process_icon" href="/finished_process">
+				<i class="Checkmark Box icon"></i>
+			</a>
+			<div class="right menu">
+				<a class="item delete_process" href="/delete_process/{{ data.pid }}">
+					<i class="Trash icon"></i>
+				</a>
+				<a class="item project_name">
+					<i class="compass icon"></i>
+					
+				</a>
+			</div>
+		</div>
+
+		<div class='ui grid info_div' style="padding: 2%" data-pid={{ data.pid }}>
+			<div class="four wide column">
+				<div class="ui secondary raised segment no-border">
+					<div class="ui card" style="width: 100%">
+						<div class="content">
+							<div class="header">{{ data.name }}</div>
+							<div class="description" style="word-wrap: break-word;">{{ data.description }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{% if data.show_script_runner %}
+			<div class="eight wide column">
+				<div class="ui secondary raised segment no-border file_uploader">
+						<div class="ui fluid file input action script_uploader" data-status={{data.show_file_upload}}>
+							<div class="ui dimmer">
+								<div class="content">
+									<div class="ui grid">
+										<div class="six wide column">
+											<div class="ui positive icon message">
+												<i class="notched circle loading icon"></i>
+												<div class="content">
+													<div class="header">
+														Loading the script
+													</div>
+												</div>
+											</div>
+										</div>
+											
+									</div>
+								</div>
+							</div>
+
+							<input type="text" readonly placeholder="Upload script">
+							<input type="file" id="file1" autocomplete="off" style="display: none">
+							<div class="ui button" type = "submit">
+								<i class="Upload small icon"></i>
+							</div>
+						</div>
+				</div>
+			</div>
+				<div class="four wide column">
+					<div class="ui secondary raised segment script_runner no-border">
+						<button class="ui right labeled icon button script_runner_button">
+							<i class="Options icon"></i>
+							Run
+						</button>
+					</div>
+				</div>
+				{% else %}
+					<div class="eight wide column"></div>
+					<div class="four wide column">
+						<div class="ui secondary raised segment runner_message no-border" >
+							<div class="ui positive icon message">
+								<i class="notched circle loading icon"></i>
+									<div class="content">
+										<div class="header">
+											Script is 
+											{% if data.status == "under_process" %}
+												Under Progress
+											{% elif data.status == "running" %}
+												Running
+											{% elif data.status == "done" %}
+												Finished
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+				
+					{% endif %}
+
+		</div>
+
+<!-- <div class="ui segment error_message_1" style="display: none">
+							<div class="ui negative message">
+								
+								<div class="header">
+									Nothing to run!
+								</div>
+							</div>
+						</div>
+ -->
+		<div class='ui grid info_div' style="padding: 2%; margin-top: -4%">
+			<div class="eight wide column">
+				<h3 class="ui top attached header no-border text-align-centre">
+					< <i class="coffee icon"></i> Code editor >
+				</h3>
+				<div class="ui secondary raised segment editor no-border no-margin-top">
+					<div class="ui dimmer">
+						<div class="content">
+							<div class="ui grid">
+								<div class="six wide column">
+									<div class="ui positive icon message">
+										<i class="notched circle loading icon"></i>
+										<div class="content">
+											<div class="header">
+												Loading the script
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<textarea class="notes lines" data-script_data={{ data.script_data }}></textarea>
+				</div>
+			</div>
+			<div class="eight wide column">
+				<h3 class="ui top attached header no-border text-align-centre">
+					< <i class="game icon"></i> Logs console >
+				</h3>
+				<div class="ui secondary raised segment editor_logs no-border no-margin-top">
+					<div class="ui dimmer">
+						<div class="content">
+							<div class="ui grid">
+								<div class="six wide column">
+									<div class="ui positive icon message">
+										<i class="notched circle loading icon"></i>
+										<div class="content">
+											<div class="header">
+												Loading the logs
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<textarea class="logs lines" data-script_data={{ data.script_data }}></textarea>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+
+	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="../static/semantic/semantic.min.js"></script>
+		<script src='../static/javascripts/my_pages/process.js'></script>
+		<script type="text/javascript" src="../static/javascripts/editor/jquery-linenumbers.min.js"></script>
+</html>

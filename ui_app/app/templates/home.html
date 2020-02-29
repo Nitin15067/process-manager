@@ -1,0 +1,150 @@
+<html>
+  <head>
+    <title>Welcone</title>
+    <link rel="stylesheet" type="text/css" href="../static/semantic/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/semantic/components/menu.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/my_pages/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div class="ui top attached menu top_menu_bar">
+      <a class="item home_icon" href="/">
+        <i class="home icon"></i>
+      </a>
+      <a class="item new_process_icon" href="/new_process">
+        <i class="plus icon"></i>
+      </a>
+      <a class="item finished_process_icon" href="/finished_process">
+        <i class="Checkmark Box icon"></i>
+      </a>
+      <div class="right menu">
+        <a class="item project_name">
+          <i class="compass icon"></i>
+          Compass
+        </a>
+      </div>
+    </div>
+
+    <div class='ui grid info_div' style="padding: 2%">
+      <div class="three wide column">
+        <div class="ui message" style="text-align: center;">
+          <div class="header">
+            Current Running Processes
+          </div>
+        </div>
+      </div>
+
+      {% if data.result.running_process_count == 0 %}
+          <div class="twelve wide column">
+            <table class="ui sortable selectable celled table">
+              <thead>
+                <tr>
+                  <th class="">No Process Currently Running</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+      
+      {% else %}
+
+      <div class="twelve wide column">
+        <table class="ui green sortable selectable celled table">
+          <thead>
+            <tr>
+              <th class="sorted descending">Pid</th>
+              <th class="">Name</th>
+              <th class="">Description</th>
+              <th class="">Status</th>
+              <th class="">Time Started</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for process_data in data.result.running_process_data %}
+                <tr class="process_row" data-url='/process/{{process_data.pid}}', data-url_prefix='{{data.result.url_prefix}}'>
+                  <td>{{process_data.pid}}</td>
+                  <td>{{process_data.name}}</td>
+                  <td>{{process_data.discription}}</td>
+                  <td>{{process_data.status}}</td>
+                  <td>{{process_data.timestamp}}</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+          
+        </table>
+      </div>
+
+      {% endif %}
+
+      <div class="one wide column"></div>
+    </div>
+
+    <div class='ui grid info_div' style="padding: 2%; margin-top: -3.5%">
+      <div class="three wide column">
+        <div class="ui message" style="text-align: center;">
+          <div class="header">
+            Process Under Progress
+          </div>
+        </div>
+      {% if data.result.under_process_count != 0 %}
+      
+        <div class="ui segment">
+          <div class="ui search">
+            <input class="prompt" type="text" placeholder="Search a Process" style="width: 100%">
+            <div class="results"></div>
+          </div>
+        </div>
+
+      {% endif %}
+      
+      </div>
+      
+      {% if data.result.under_process_count == 0 %}
+          <div class="twelve wide column">
+            <table class="ui sortable selectable celled table">
+              <thead>
+                <tr>
+                  <th class="">No Process Under Progress</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+      
+      {% else %}
+
+      <div class="twelve wide column">
+        <table class="ui sortable selectable celled table">
+          <thead>
+            <tr>
+              <th class="sorted descending">Pid</th>
+              <th class="">Name</th>
+              <th class="">Description</th>
+              <th class="">Status</th>
+              <th class="">Time Started</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for process_data in data.result.under_process_data %}
+                <tr class="process_row" data-url='/process/{{process_data.pid}}', data-url_prefix='{{data.result.url_prefix}}'>
+                  <td>{{process_data.pid}}</td>
+                  <td>{{process_data.name}}</td>
+                  <td>{{process_data.discription}}</td>
+                  <td>{{process_data.status}}</td>
+                  <td>{{process_data.timestamp}}</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+          
+        </table>
+      </div>
+
+      {% endif %}
+      <div class="one wide column"></div>
+    </div>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../static/semantic/semantic.min.js"></script>
+    <script src="../static/javascripts/tablesort/tablesort.js"></script>
+    <script src='../static/javascripts/my_pages/home.js'></script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+{
+	"home_url": "http://localhost:5000",
+	"root_folder": "/home/nitin/code/Ashrut/compass",
+	"data_folder": "app_data",
+
+	"kafka":{
+		"producer":{
+			"ip":"localhost",
+			"port":"9092",
+			"topic":"process"
+		},
+		"consumer":{
+			"ip":"localhost",
+			"port":"9092",
+			"topic":"process",
+			"from_begin": 0
+		}
+	}
+}
